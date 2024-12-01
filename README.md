@@ -36,7 +36,7 @@ Aqui pongo un ejemplo de como se estaran implmentando las funciones, este caso s
 		- ¿Que significan los signos (?) ? Los signos representa la cantidad de  variables que pide el store para que lo ejecute sin ningun problema.
 
 ```javascript
-	export const saveLead = async (req,res) =>
+export const saveLead = async (req,res) =>
 		{ 
  try{
    const  {strFullName,

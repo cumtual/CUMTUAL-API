@@ -36,45 +36,50 @@ Aqui pongo un ejemplo de como se estaran implmentando las funciones, este caso s
 		- ¿Que significan los signos (?) ? Los signos representa la cantidad de  variables que pide el store para que lo ejecute sin ningun problema.
 
 ```javascript
-					export const saveLead = async (req,res) =>
-					{ 
-						 try{
-						   const  {strFullName,
-							strEmail,
-							intTipoServ,
-							intBuisness,
-							strPhone,
-							strScheduleContact,
-							strProjectDescription} = req.body;
+	export const saveLead = async (req,res) =>
+		{ 
+ try{
+   const  {strFullName,
+    strEmail,
+    intTipoServ,
+    intBuisness,
+    strPhone,
+    strScheduleContact,
+    strProjectDescription} = req.body;
 
-						const parameters=[strFullName,
-							strEmail,
-							intTipoServ,
-							intBuisness,
-							strPhone,
-							strScheduleContact,
-							strProjectDescription
-						]
+    console.log("These varibles send my front",req.body);
 
-						try{
-							 //Conection to bd
-						const connection = await getConnection();
-						//Execute the store procedure 
-						 const [results] = await connection.execute('CALL sp_tbSaveLeads(?, ?, ?, ?, ?, ?, ?)',parameters);
+//These parameter send to store procedure
+    const parameters=[strFullName,
+        strEmail,
+        intTipoServ,
+        intBuisness,
+        strPhone,
+        strScheduleContact,
+        strProjectDescription
+    ]
 
-						  // Send validate email
-						  await sendEmailClient(strEmail, strFullName,);
-						  await sendEmailCumtual(strEmail,strEmail,strProjectDescription,strPhone);
-						  return res.status(200).json({ message: 'Lead save' });
-						}catch(error){
-							console.log("Can't conection to store procedure");
-						}
+   // console.log("Parameters",parameters);
 
-					 }  catch(error){
+    try{
+         //Conection to bd
+    const connection = await getConnection();
+    //Execute the store procedure 
+     const [results] = await connection.execute('CALL sp_tbSaveLeads(?, ?, ?, ?, ?, ?, ?)',parameters);
 
-					} 
-					}
-                    ```
+      // Send validate email
+      await sendEmailClient(strEmail, strFullName,);
+      await sendEmailCumtual(strEmail,strEmail,strProjectDescription,strPhone);
+      return res.status(200).json({ message: 'Lead save' });
+    }catch(error){
+        console.log("Can't conection to store procedure");
+    }
+    
+ }  catch(error){
+
+} 
+}
+ ```
 
 #### BASE DE DATOS (MYSQL)
 

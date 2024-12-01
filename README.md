@@ -35,6 +35,7 @@ Aqui pongo un ejemplo de como se estaran implmentando las funciones, este caso s
 	- Se hace la conexion a mi base de datos para asi poder ejecutar el store con las variables que se mandaron.
 		- ¿Que significan los signos (?) ? Los signos representa la cantidad de  variables que pide el store para que lo ejecute sin ningun problema.
 
+```javascript
 					export const saveLead = async (req,res) =>
 					{ 
 						 try{
@@ -73,6 +74,7 @@ Aqui pongo un ejemplo de como se estaran implmentando las funciones, este caso s
 
 					} 
 					}
+                    ```
 
 #### BASE DE DATOS (MYSQL)
 

@@ -2,6 +2,13 @@
     <img src="/src/assets/img/logocumtual-23.webp" alt="Logo Cumtual" width="200" />
 </div>
 
+###MUY IMPORTANTE
+> - La api esta siendo declarada en ingles, desde las variables hasta los nombres de las funciones, hacer buena practica y seguir con el idioma en ingles.
+
+##NOTA
+> - La devolucion de errores si tiene que ser en español por la pagina y a los usuarios que manejaremos
+
+
 ###IMPORTANTE
 > - Favor de seguir cada una de las declaraciones de varibles para no confundirse con algo o con la extraccion de un dato.
 > - Si tienen alguna duda favor de comunicarse conmigo (Josue) para poder aclararla y resolverla

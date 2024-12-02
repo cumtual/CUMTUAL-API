@@ -21,13 +21,16 @@
 ####VARIABLES
 
 Las declaraciones se hace en base al tipo de valor que obtendra la variable, en la siguiente tabla adjunto algunos ejemplos...
+Cuando se declaren las variables de identificador seran declaradas con el int + (Nombre de la tabla sin el tb) + Id = intLeadId (Ejemplo con la tabla que usaremos de lead)
+Normalmente cuando son str se le ponen str + Nombre + (Algo referenciado a la tabla que se esta ocupando) esto se usa en todas las variables
+
 
 Declaracion de Variables  | Tipo de Variable
 ------------- | -------------
- intValorId | Int.
-strValorNombre  | String. 
-datValorFecha  | DateTime. 
-dblValorPrecio  | Decimal(18,2)
+ intId | Int.
+strNombre    | String. 
+datFecha  | DateTime. 
+dblPrecio  | Decimal(18,2)
 
 
 

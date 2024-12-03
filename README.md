@@ -2,23 +2,22 @@
     <img src="/src/assets/img/logocumtual-23.webp" alt="Logo Cumtual" width="200" />
 </div>
 
-###MUY IMPORTANTE
+## 🧑‍🚀 MUY IMPORTANTE
 > - La api esta siendo declarada en ingles, desde las variables hasta los nombres de las funciones, hacer buena practica y seguir con el idioma en ingles.
 
-##NOTA
+## NOTA
 > - La devolucion de errores si tiene que ser en español por la pagina y a los usuarios que manejaremos
 
 
-###IMPORTANTE
+## 👀 IMPORTANTE
 > - Favor de seguir cada una de las declaraciones de varibles para no confundirse con algo o con la extraccion de un dato.
 > - Si tienen alguna duda favor de comunicarse conmigo (Josue) para poder aclararla y resolverla
 
-###EJECUTAR LA API
-
+### EJECUTAR LA API
 	npm run dev
 
 
-####VARIABLES
+## VARIABLES
 
 Las declaraciones se hace en base al tipo de valor que obtendra la variable, en la siguiente tabla adjunto algunos ejemplos...
 Cuando se declaren las variables de identificador seran declaradas con el int + (Nombre de la tabla sin el tb) + Id = intLeadId (Ejemplo con la tabla que usaremos de lead)
@@ -35,7 +34,7 @@ dblPrecio  | Decimal(18,2)
 
 
 
-###GUARDADO
+## GUARDADO
 
 Aqui pongo un ejemplo de como se estaran implmentando las funciones, este caso solo haremos una funcion de guardado.
 - Primer Try: 
@@ -91,7 +90,7 @@ export const saveLead = async (req,res) =>
 }
  ```
 
-#### BASE DE DATOS (MYSQL)
+## BASE DE DATOS (MYSQL)
 
 Porfavor de seguir la misma esctructura para crear un store procedure y tambien las tablas, desde los nombres de las columnas hasta en los stores. Aqui pongo unos ejemplos de las declaraciones de los stores y tablas...
 Favor de seguir los nombres de las tablas como se muestran en las tablas.

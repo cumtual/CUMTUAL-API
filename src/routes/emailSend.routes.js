@@ -4,7 +4,7 @@ import { Router } from "express";
 
 const router = Router();
 
-router.post("/Lead",saveLead);
+router.post("/save-lead",saveLead);
 //router.post("/emailSend",sendEmail);
 
-export default router;  
+export default router;

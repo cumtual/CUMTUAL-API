@@ -1,9 +1,8 @@
 import { getConnection } from "../database/conexion.js";
-import {sendEmailClient, sendEmailCumtual} from "../helpers/emailHelper.js";
-
-
+import {sendEmailClient} from "../helpers/emailHelper.js";
 
 export const saveLead = async (req, res) => {
+
     try {
       const {
         strFullName,
@@ -13,17 +12,12 @@ export const saveLead = async (req, res) => {
         strPhone,
         strScheduleContact,
         strProjectDescription,
+        language
       } = req.body;
-  
-      //console.log("These variables sent from front-end:", req.body);
-  
-      // Validations
       
       if (!strFullName || !strEmail || !strPhone || !strProjectDescription) {
         return res.status(400).json({ message: 'Campos requeridos.' });
       }
-  
-   
       const trimmedFullName = strFullName.trim();
       const trimmedEmail = strEmail.trim();
       const trimmedPhone = strPhone.trim();
@@ -41,10 +35,10 @@ export const saveLead = async (req, res) => {
       }
   
       // 4. Validate phone number to be numeric and of expected length
-      const phoneRegex = /^[0-9]{10}$/; // Assuming a 10-digit phone number
-      if (!phoneRegex.test(trimmedPhone)) {
-        return res.status(400).json({ message: 'Formato invalido del telefono.' });
-      }
+      // const phoneRegex = /^[0-9]{10}$/; // Assuming a 10-digit phone number
+      // if (!phoneRegex.test(trimmedPhone)) {
+      //   return res.status(400).json({ message: 'Formato invalido del telefono.' });
+      // }
   
       // 5. Validate that project description does not contain invalid characters (if needed)
       const projectDescRegex = /^[a-zA-Z0-9\s.,!?-]*$/; // Adjust the pattern as needed
@@ -73,14 +67,13 @@ export const saveLead = async (req, res) => {
   
       // Execute stored procedure
       const [results] = await connection.execute(
-        'CALL sp_tbSaveLeads(?, ?, ?, ?, ?, ?, ?)',
+        'CALL sp_tbLeads_Save(?, ?, ?, ?, ?, ?, ?)',
         parameters
       );
   
       // Send validation email
-      await sendEmailClient(trimmedEmail, trimmedFullName);
-      await sendEmailCumtual(trimmedEmail, trimmedEmail, trimmedProjectDescription, trimmedPhone);
-  
+      await sendEmailClient(trimmedEmail, trimmedFullName, language);
+      // await sendEmailCumtual(trimmedEmail, trimmedEmail, trimmedProjectDescription, trimmedPhone);
       return res.status(200).json({ message: 'Lead saved successfully' });
   
     } catch (error) {

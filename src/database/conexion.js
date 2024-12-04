@@ -1,6 +1,8 @@
 import mysql from "mysql2/promise";
+import dotenv from 'dotenv';
+dotenv.config();
 
-import { DB_USER, DB_PASSWORD, DB_DATABASE, DB_SERVER, DB_PORT ,DB_HOST} from "../config.js";
+const { DB_HOST, DB_USER, DB_PASSWORD, DB_SERVER, DB_DATABASE, DB_PORT } = process.env;
 
 export const dbSettings = {
    host:DB_HOST,
@@ -23,7 +25,8 @@ export const dbSettings = {
          console.log("CONNECTION SUCCESFULLY");
         return connection;
     }
-    catch{
+    catch(error){
+      console.log(error)
         console.log("Error to database connect")
     }
   }

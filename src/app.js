@@ -57,8 +57,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/leads", limiter, emailSendRoutes);
-app.use("/api/", limiter ,formsSelect);
+app.use("/leads", limiter, emailSendRoutes);
+app.use("/forms", limiter ,formsSelect);
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
 });

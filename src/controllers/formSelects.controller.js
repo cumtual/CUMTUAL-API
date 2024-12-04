@@ -30,7 +30,6 @@ const getBuissnes= async (req,res) =>{
 
     }catch(error){
         console.error('Error executing query:', error);
-        
         // Send error response if something goes wrong
         return res.status(500).json({ message: 'Error retrieving buissnes types', error: error.message });
 

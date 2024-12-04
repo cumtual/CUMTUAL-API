@@ -1,7 +1,6 @@
-import { getConnection } from "../database/conexion.js";
+const { getConnection } = require("../database/conexion.js");
 
-
-export const getServiceType = async (req,res) =>{
+const getServiceType = async (req,res) =>{
     try{
         const connection = await getConnection();
 
@@ -19,8 +18,7 @@ export const getServiceType = async (req,res) =>{
 
     }
 }
-
-export const getBuissnes= async (req,res) =>{
+const getBuissnes= async (req,res) =>{
     try{
         const connection = await getConnection();
 
@@ -37,4 +35,9 @@ export const getBuissnes= async (req,res) =>{
         return res.status(500).json({ message: 'Error retrieving buissnes types', error: error.message });
 
     }
+}
+
+module.exports = {
+    getServiceType, 
+    getBuissnes
 }

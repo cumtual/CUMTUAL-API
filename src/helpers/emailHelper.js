@@ -1,4 +1,4 @@
-import nodemailer from "nodemailer";
+const nodemailer = require("nodemailer");
 
 const transport = nodemailer.createTransport({
   host: "smtp.hostinger.com",
@@ -11,7 +11,7 @@ const transport = nodemailer.createTransport({
 });
 
 // Función para enviar un correo
-export async function sendEmailClient(email, name, language) {
+async function sendEmailClient(email, name, language) {
   if(language === 'es'){
     try {
       await transport.sendMail({
@@ -81,6 +81,8 @@ export async function sendEmailClient(email, name, language) {
     console.error("Error to send email.", error);
   }
 }
+
+module.exports = {sendEmailClient}
 
 // export  async function sendEmailCumtual(email, name,strProjectDescription,phone) {
 

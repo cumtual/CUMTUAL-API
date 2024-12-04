@@ -1,10 +1,11 @@
-import express, { Router } from "express";
-import helmet from "helmet";
-import rateLimit from "express-rate-limit";
-import cors from "cors";
-import emailSendRoutes from "./routes/emailSend.routes.js";
-import formsSelect from "./routes/forms.routes.js";
-
+const express = require("express");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+const cors = require("cors");
+const emailSendRoutes = require("./routes/emailSend.routes.js");
+const formsSelect = require("./routes/forms.routes.js");
+const PORT = process.env.PORT || 3000;
+const winston = require("winston")
 const app = express();
 
 const corsOptions = {
@@ -19,7 +20,6 @@ app.get("/", (req, res) => {
 
 app.use(helmet());
 app.use(cors(corsOptions));
-app.use();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -30,7 +30,7 @@ const limiter = rateLimit({
   message:
     "Demasiadas solicitudes desde esta IP, por favor intenta nuevamente más tarde.",
 });
-app.use(limiter());
+app.use(limiter);
 
 app.disable("x-powered-by");
 const logger = winston.createLogger({
@@ -59,5 +59,9 @@ app.use((req, res, next) => {
 
 app.use("/api/leads", limiter, emailSendRoutes);
 app.use("/api/", limiter ,formsSelect);
+app.listen(PORT, () => {
+  console.log(`Server listening on port: ${PORT}`);
+});
 
-export default app;
+
+module.exports = app;

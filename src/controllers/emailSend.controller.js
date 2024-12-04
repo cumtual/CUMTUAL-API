@@ -1,7 +1,7 @@
-import { getConnection } from "../database/conexion.js";
-import {sendEmailClient} from "../helpers/emailHelper.js";
-
-export const saveLead = async (req, res) => {
+const { getConnection } = require("../database/conexion.js");
+const { sendEmailClient } = require("../helpers/emailHelper.js")
+ 
+const saveLead = async (req, res) => {
 
     try {
       const {
@@ -81,3 +81,5 @@ export const saveLead = async (req, res) => {
       return res.status(500).json({ message: 'An error occurred while saving the lead' });
     }
   };
+
+  module.exports = {saveLead}

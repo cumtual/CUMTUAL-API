@@ -4,6 +4,7 @@ const rateLimit = require("express-rate-limit");
 const cors = require("cors");
 const emailSendRoutes = require("./routes/emailSend.routes.js");
 const formsSelect = require("./routes/forms.routes.js");
+const loginAuth = require("./routes/loginAuth.routes.js");
 const PORT = process.env.PORT || 3000;
 const winston = require("winston")
 const app = express();
@@ -59,6 +60,8 @@ app.use((req, res, next) => {
 
 app.use("/leads", limiter, emailSendRoutes);
 app.use("/forms", limiter ,formsSelect);
+app.use("/login",loginAuth);
+
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
 });

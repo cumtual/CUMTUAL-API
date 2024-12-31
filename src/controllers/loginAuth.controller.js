@@ -1,7 +1,6 @@
 const  { getConnection } = require("../database/conexion");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
-const verifyPassword = require('../middleware/hassheoPassword.middleware.js')
 const bcrypt = require('bcrypt');
 const { JWT_SECRET } =  process.env;
 
@@ -36,7 +35,13 @@ const loginAuth = async (req,res) =>{
     )   
     const storedHash = result[0][0].strPassword;  // El hash almacenado en la base de datos
 
-    await verifyPassword(trimPassword,storedHash,res);
+     const isPasswordValid = await bcrypt.compare(trimPassword, storedHash);
+    
+        if (!isPasswordValid) {
+       
+          return res.status(401).json({ message: 'Contraseña incorrecta' });
+          // Respuesta enviada, el flujo se detiene aquí
+        }
 
     if (result[0][0].mensaje != undefined) {       
         return res.status(401).json({ message: 'Usuario o contraseña incorrectos' });
@@ -44,7 +49,8 @@ const loginAuth = async (req,res) =>{
 
     const user = {
         username: result[0][0].strUserName,           
-        role: result[0][0].intRol,       
+        role: result[0][0].intRol,
+        intstatus: result[0][0].intStatus       
     };
 
   
@@ -53,9 +59,9 @@ const loginAuth = async (req,res) =>{
 
  
     const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '1m' });
-    res.json({ token });
+    res.json({message:'Token Generado', token });
 
-   // return res.redirect('/');
+    //res.redirect('/login/dashboard');
     
 
     }catch (error) {

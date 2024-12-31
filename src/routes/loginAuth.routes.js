@@ -5,9 +5,7 @@ const  authenticateToken  = require ('../middleware/auth.middleware.js');
 
 const router = Router();
 
-router.post('/login-SingIn', loginAuth);
-
-router.post('/dashboard', authenticateToken);
+router.post('/login', loginAuth);
 
 module.exports = router;
 

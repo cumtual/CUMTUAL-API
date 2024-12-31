@@ -8,6 +8,7 @@ const loginAuth = require("./routes/loginAuth.routes.js");
 const PORT = process.env.PORT || 3000;
 const winston = require("winston")
 const app = express();
+const authenticateToken = require('./middleware/auth.middleware.js')
 
 const corsOptions = {
   origin: ["https://cumtual.com", "http://localhost:3000", "http://5.183.9.167"],
@@ -15,7 +16,7 @@ const corsOptions = {
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 
-app.get("/", (req, res) => {
+app.get("/", authenticateToken([1]), (req, res) => {
     res.send("Bienvenido a la API de Cumtual!");
 });
 

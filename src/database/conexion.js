@@ -1,5 +1,6 @@
 const mysql = require("mysql2/promise");
 const dotenv = require("dotenv");
+const { Console } = require("winston/lib/winston/transports");
 dotenv.config();
 
 const { DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE, DB_PORT } =
@@ -11,10 +12,7 @@ const dbSettings = {
   password: DB_PASSWORD,
   database: DB_DATABASE,
   port: DB_PORT,
-  // options: {
-  //   trustServerCertificate: true,
-  //   trustedConnection: false,
-  // },
+  
 };
 
 async function getConnection() {
@@ -23,7 +21,7 @@ async function getConnection() {
     console.log("CONNECTION SUCCESFULLY");
     return connection;
   } catch (error) {
-    console.log(error);
+   // console.log(error);
     console.log("Error to database connect");
   }
 }

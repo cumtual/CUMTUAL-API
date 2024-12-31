@@ -1,6 +1,7 @@
 const  { getConnection } = require("../database/conexion");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
+const verifyPassword = require('../middleware/hassheoPassword.middleware.js')
 const bcrypt = require('bcrypt');
 const { JWT_SECRET } =  process.env;
 
@@ -33,22 +34,13 @@ const loginAuth = async (req,res) =>{
     const [result] = await connection.execute(
         'CALL sp_tbCumtualUser_Auth ( ?  )',spParameters
     )   
-
     const storedHash = result[0][0].strPassword;  // El hash almacenado en la base de datos
 
-    // Comparar la contraseña ingresada con el hash almacenado en la base de datos
-    const isPasswordValid = await bcrypt.compare(trimPassword, storedHash);
+    await verifyPassword(trimPassword,storedHash,res);
 
-    if (!isPasswordValid) {
-      return res.status(401).json({ message: 'Contraseña incorrecta' });
-    }
-     
-     if (result[0][0].mensaje != undefined) {       
+    if (result[0][0].mensaje != undefined) {       
         return res.status(401).json({ message: 'Usuario o contraseña incorrectos' });
-    }
-
-
-    
+    }    
 
     const user = {
         username: result[0][0].strUserName,           
@@ -61,15 +53,13 @@ const loginAuth = async (req,res) =>{
 
  
     const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '1m' });
-
-
     res.json({ token });
 
    // return res.redirect('/');
     
 
     }catch (error) {
-        console.error(error);
+       // console.error(error);
         res.status(500).json({ message: 'Error en el servidor' });
     }
 }
